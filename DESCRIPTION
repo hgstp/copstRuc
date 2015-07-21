@@ -1,14 +1,17 @@
 Package: copstRuc
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
+Title: Copula structure analysis
+Version: 0.0.0.9000
 Date: 2015-07-21
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Authors@R: c(
+    person("Stephan","Haug", email = "haug@tum.de", role = c("aut", "cre")),
+    person("Gabriel", "Kuhn", role = "aut"))
+Encoding: UTF-8
+Description: Performs robust and extreme copula structrue analysis.
+License: GPL (>= 2)
 LazyData: TRUE
-Imports: 
-    Rcpp (>= 0.11.6)
-LinkingTo: 
+Imports:
+    Rcpp (>= 0.11.6),
+    Matrix
+LinkingTo:
     Rcpp
