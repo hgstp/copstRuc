@@ -1,12 +1,15 @@
 #' Computes the asymptotic distribution free test statistic
 #'
-#' @param x object of class copstru
+#' @param x object of class copstruc
 #' @param m number of expected factors
 #' @param weight_matrix_adf method to compute weight matrix
 #' @param maxit_optim the maximum number of iterations in optim
 #' @export
 #'
 #' @return object of class asymp_distr_free
+#'
+#' @example
+#'
  asymp_distr_free <- function(x,  m = 1, weight_matrix_adf = "regular", ...){
 
   Rvec <- x$Rvec
@@ -28,8 +31,9 @@
  }
 
 
- #' @export
- print.asymp_distr_free = function(x, ... ){
+ #------------------------
+
+ print.asymp_distr_free <- function(x, ... ){
 
    cat("Call:\n")
    print(x$call)
@@ -37,7 +41,8 @@
    print(x$nF)
  }
 
- #' @export
+ #------------------------
+
  summary.asymp_distr_free = function(object, ...){
     tab <- cbind(test_statistic = object$nF[1],
                  dimension = object$dim,
@@ -53,12 +58,12 @@
    return(ret)
  }
 
-#' @export
+#------------------------
  print.summary.asymp_distr_free = function(object, ... ){
    cat("Call:\n")
    print(object$call)
    cat("\n")
-   printCoefmat(object$results, P.value = TRUE, has.Pvalue = TRUE)
+   printCoefmat(object$results, P.values = TRUE, has.Pvalue = TRUE)
    cat("\n")
    printCoefmat(cbind(object$factor_loadings, object$specific_loadings))
    cat("\n")

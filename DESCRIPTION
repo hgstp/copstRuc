@@ -10,8 +10,9 @@ Encoding: UTF-8
 Description: Performs robust and extreme copula structrue analysis.
 License: GPL (>= 2)
 LazyData: TRUE
-Imports:
+Imports: 
     Rcpp (>= 0.11.6),
-    Matrix
-LinkingTo:
+    Matrix,
+    pcaPP
+LinkingTo: 
     Rcpp
