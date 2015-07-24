@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// asymp_var_tau
+NumericVector asymp_var_tau(NumericMatrix data, int d, int n);
+RcppExport SEXP copstRuc_asymp_var_tau(SEXP dataSEXP, SEXP dSEXP, SEXP nSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericMatrix >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    __result = Rcpp::wrap(asymp_var_tau(data, d, n));
+    return __result;
+END_RCPP
+}
 // rcpp_hello
 List rcpp_hello();
 RcppExport SEXP copstRuc_rcpp_hello() {

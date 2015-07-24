@@ -7,7 +7,7 @@
 #  status:          	if status=TRUE, the progress of calculation is printed.
 #
 
- rho_tail_est <- function(Xmult, k, prec = 31, asymp = FALSE, status = FALSE){
+ rho_tail_est <- function(Xmult, k, prec = 31, asymp = FALSE){
 
    n <- dim(Xmult)[1]
    d <- dim(Xmult)[2]
@@ -182,8 +182,7 @@
               x = as.double(x), y = as.double(y), dlaX = as.double(dlaX), dlaY = as.double(dlaY),
               dlaR = as.double(dlaR), dlaNu = as.double(dlaNu), Weight = as.double(weight),
               a = as.double(a), b = as.double(b),
-              Sigma4 = as.double(Sigma_4), Sigma23 = as.double(Sigma_2_3), Sigma1 = as.double(Sigma_1),
-              status = as.integer(status))
+              Sigma4 = as.double(Sigma_4), Sigma23 = as.double(Sigma_2_3), Sigma1 = as.double(Sigma_1))
 
     Sigma_4 <- matrix(out$Sigma4, dL, dL)
     Sigma_4 <- Sigma_4 + t(Sigma_4)

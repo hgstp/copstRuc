@@ -14,7 +14,6 @@
 #' elements of the copula correlation estimator is calculated. Default = FALSE
 #' @param status if \code{status = TRUE}, the progress of calculation is printed.
 #'
-#' @export
 #' @return object of class copstruc, which is specified by:
 #'
 #'   \itemize{
@@ -24,6 +23,9 @@
 #'      \item \code{nu}, the estimated coefficient of regular variation (if \code{method == 'tail'})
 #'      \item \code{method}, the estimation method being used
 #'      }
+#' @export
+
+
 
 copstruc <- function(x, method = "tail", k = 100, asymp = FALSE, k_select = FALSE, ... ){
   x <- as.matrix(x)
