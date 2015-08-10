@@ -9,7 +9,7 @@ using namespace Rcpp;
 //
 
 // [[Rcpp::export]]
-  NumericVector asymp_var_tau(NumericMatrix data, int d, int n){
+  NumericVector asymp_var_tau(NumericVector data, int d, int n){
     int dL = d * (d - 1) / 2;
     double N = 1 / (n - 1);
 

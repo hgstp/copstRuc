@@ -23,8 +23,9 @@
    if(asymp){
      DL <- D * (D - 1) / 2
      var_tau <- rep(0, DL^2)
+     x_vectorised <- as.double(x)
 
-     var_tau <- matrix(asymp_var_tau(x, D, N), DL, DL)
+     var_tau <- matrix(asymp_var_tau(x_vectorised, D, N), DL, DL)
      ret$tau4 <- var_tau + t(var_tau)
      diag(ret$tau4) <- diag(ret$tau4) / 2
      }

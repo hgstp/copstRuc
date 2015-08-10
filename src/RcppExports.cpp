@@ -5,16 +5,57 @@
 
 using namespace Rcpp;
 
+// asymp_var_tail
+NumericMatrix asymp_var_tail(NumericVector RANKM, int n, int k, int d, NumericVector dimInd, NumericVector x, NumericVector y, NumericVector dlaX, NumericVector dlaY, NumericVector dlaR, NumericVector dlaNu, NumericVector Weight, NumericVector a, NumericVector b);
+RcppExport SEXP copstRuc_asymp_var_tail(SEXP RANKMSEXP, SEXP nSEXP, SEXP kSEXP, SEXP dSEXP, SEXP dimIndSEXP, SEXP xSEXP, SEXP ySEXP, SEXP dlaXSEXP, SEXP dlaYSEXP, SEXP dlaRSEXP, SEXP dlaNuSEXP, SEXP WeightSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type RANKM(RANKMSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dimInd(dimIndSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dlaX(dlaXSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dlaY(dlaYSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dlaR(dlaRSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dlaNu(dlaNuSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type Weight(WeightSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type a(aSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type b(bSEXP);
+    __result = Rcpp::wrap(asymp_var_tail(RANKM, n, k, d, dimInd, x, y, dlaX, dlaY, dlaR, dlaNu, Weight, a, b));
+    return __result;
+END_RCPP
+}
 // asymp_var_tau
-NumericVector asymp_var_tau(NumericMatrix data, int d, int n);
+NumericVector asymp_var_tau(NumericVector data, int d, int n);
 RcppExport SEXP copstRuc_asymp_var_tau(SEXP dataSEXP, SEXP dSEXP, SEXP nSEXP) {
 BEGIN_RCPP
     Rcpp::RObject __result;
     Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< NumericMatrix >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
     Rcpp::traits::input_parameter< int >::type d(dSEXP);
     Rcpp::traits::input_parameter< int >::type n(nSEXP);
     __result = Rcpp::wrap(asymp_var_tau(data, d, n));
+    return __result;
+END_RCPP
+}
+// tail_est
+NumericVector tail_est(NumericVector RANKM, int n, int k, int d, int prec, NumericVector x, NumericVector y);
+RcppExport SEXP copstRuc_tail_est(SEXP RANKMSEXP, SEXP nSEXP, SEXP kSEXP, SEXP dSEXP, SEXP precSEXP, SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type RANKM(RANKMSEXP);
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< int >::type d(dSEXP);
+    Rcpp::traits::input_parameter< int >::type prec(precSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    __result = Rcpp::wrap(tail_est(RANKM, n, k, d, prec, x, y));
     return __result;
 END_RCPP
 }

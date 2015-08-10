@@ -29,11 +29,11 @@
 
    laE <- matrix(0, dL, prec)
 
-   out <- .C('laEst', RANKM = as.integer(RANKmult), n = as.integer(n),
-             k = as.integer(k), d = as.integer(d), prec = as.integer(prec),
-             x = as.double(x), y = as.double(y), laE = as.double(laE))
+   out <- emp_tail_dependence(as.integer(RANKmult), as.integer(n), as.integer(k),
+                              as.integer(d), as.integer(prec),
+                              x, y)
 
-   laE <- matrix(out$laE, dL, prec)
+   laE <- matrix(out, dL, prec)
 
    # matrix of la-estimator: la[ij,phi]
 
@@ -41,7 +41,7 @@
 
 
    # estimated nu for x=1, y=1
-   nu_at_tdc = 1:dL
+   nu_at_tdc <- 1 : dL
 
    # index in thetavec corresponding to x=1, y=1
    piO4 <- as.integer(round(prec / 2, 0))
@@ -62,7 +62,7 @@
    Qij[, 2] <- pmin(pi / 2 - .1, atan(exp(expo)))
 
    nu_tilde_ij <- matrix(0, dL, prec)
-   nu_hat_ij  =  (1 : dL) * NA
+   nu_hat_ij  <-  (1 : dL) * NA
 
    for(i in 1 : dL){
      if(nu_at_tdc[i]){
@@ -177,23 +177,21 @@
     Sigma_2_3 <- matrix(0, dL, dL)
     Sigma_4 <- matrix(0, dL, dL)
 
-    out <- .C("La4EstN", RANKM = as.integer(RANKmult), n = as.integer(n), k = as.integer(k),
-              d = as.integer(d), dimInd = as.integer(dimInd - 1),
-              x = as.double(x), y = as.double(y), dlaX = as.double(dlaX), dlaY = as.double(dlaY),
-              dlaR = as.double(dlaR), dlaNu = as.double(dlaNu), Weight = as.double(weight),
-              a = as.double(a), b = as.double(b),
-              Sigma4 = as.double(Sigma_4), Sigma23 = as.double(Sigma_2_3), Sigma1 = as.double(Sigma_1))
+    out <- asymp_var_tail(as.integer(RANKmult), as.integer(n), as.integer(k), as.integer(d),
+                          as.integer(dimInd - 1),
+                          x, y, dlaX, dlaY, dlaR, dlaNu,
+                          Weight, a, b)
 
-    Sigma_4 <- matrix(out$Sigma4, dL, dL)
+    Sigma_4 <- matrix(out[, 3], dL, dL)
     Sigma_4 <- Sigma_4 + t(Sigma_4)
     diag(Sigma_4) <- diag(Sigma_4) / 2
 
-    Sigma_2_3 <- matrix(out$Sigma23, dL, dL)
+    Sigma_2_3 <- matrix(out[, 2], dL, dL)
     Sigma_2_3 <- Sigma_2_3 + t(Sigma_2_3)
     diag(Sigma_2_3) <- diag(Sigma_2_3) / 2
     Sigma_2_3 <- apply(Sigma_2_3, 1, sum)
 
-    Sigma_1 <- matrix(out$Sigma1, dL, dL)
+    Sigma_1 <- matrix(out[, 1], dL, dL)
     Sigma_1 <- 2 * sum(Sigma_1) - sum(diag(Sigma_1))
 
     ret$Ga <- matrix(0, dL, dL)
