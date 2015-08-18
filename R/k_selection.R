@@ -18,7 +18,7 @@
    nu_k <- seq_along(k)
 
    for(i in seq_along(k)){
-     nu_k[i] <- rhoTailEst(x, k = k[i], prec = prec)$nu
+     nu_k[i] <- rho_tail_est(x, k = k[i], prec = prec)$nu
    }
 
    plot(k, nu_k, type = "l", ylab = expression(paste("estimated ", nu)))

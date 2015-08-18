@@ -8,8 +8,7 @@
 #'
 #' @return object of class asymp_distr_free
 #'
-#' @example
-#'
+
  asymp_distr_free <- function(x,  m = 1, weight_matrix_adf = "regular", ...){
 
   Rvec <- x$Rvec

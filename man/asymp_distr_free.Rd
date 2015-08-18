@@ -7,7 +7,7 @@
 asymp_distr_free(x, m = 1, weight_matrix_adf = "regular", ...)
 }
 \arguments{
-\item{x}{object of class copstru}
+\item{x}{object of class copstruc}
 
 \item{m}{number of expected factors}
 

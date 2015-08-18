@@ -11,8 +11,8 @@
 #' @return \code{tde}	value of the tail dependence function
 #' with parameters \code{nu} and \code{rho} at a point (\code{x},\code{y})
 #' @export
-#' @example
-#' ellip_tdf(1,1)
+
+
 
 
 

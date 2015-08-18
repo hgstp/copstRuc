@@ -19,7 +19,7 @@
    RANKmult <- apply(Xmult, 2, rank)
 
    # correlation estimate based on kendall's tau
-   Rtau <- sin(tauest(Xmult)$tau * pi / 2)
+   Rtau <- sin(rho_tau_est(Xmult)$tau * pi / 2)
 
    thetavec <- theta_function(seq(0.05, pi / 2 - .05, length = prec), 2.5)
    thetavec[round(prec/2, 0)] <- pi / 4
@@ -29,7 +29,7 @@
 
    laE <- matrix(0, dL, prec)
 
-   out <- emp_tail_dependence(as.integer(RANKmult), as.integer(n), as.integer(k),
+   out <- emp_tail_dependence(RANKmult, as.integer(n), as.integer(k),
                               as.integer(d), as.integer(prec),
                               x, y)
 
@@ -81,7 +81,7 @@
          }
        nu_hat_ij[i] <- sum(weight[a:b] * nu_tilde_ij[i, a : b]) / sum(weight * ind)
      }
-     }
+   }
    # result of function rhoTailEst
    ret <- list()
    ret$nu <- mean(nu_hat_ij, na.rm = TRUE)
@@ -90,6 +90,7 @@
    #now, nu is estimated; next we estimate rho for x=1, y=1
 
    rho_at_tdc <- 1 : dL
+
 
    for(i in 1 : dL){
      rho_at_tdc[i] <- rhosolve(laE[i, piO4], 1, 1, nu)
@@ -130,7 +131,7 @@
 
    # ret$R = PosDefCorr(Rho_lambda)
 
-   ret$R <- nearPD(Rho_lambda, corr = TRUE )$mat
+   ret$R <- Matrix::nearPD(Rho_lambda, corr = TRUE )$mat
    Rvec <- ret$R[lower.tri(ret$R)]
    ret$Rvec <- Rvec
    #now, Rho_lambda is estimated
@@ -177,10 +178,10 @@
     Sigma_2_3 <- matrix(0, dL, dL)
     Sigma_4 <- matrix(0, dL, dL)
 
-    out <- asymp_var_tail(as.integer(RANKmult), as.integer(n), as.integer(k), as.integer(d),
-                          as.integer(dimInd - 1),
+    out <- asymp_var_tail(c(RANKmult), as.integer(n), k, d,
+                          c(dimInd - 1),
                           x, y, dlaX, dlaY, dlaR, dlaNu,
-                          Weight, a, b)
+                          weight, a, b)
 
     Sigma_4 <- matrix(out[, 3], dL, dL)
     Sigma_4 <- Sigma_4 + t(Sigma_4)
@@ -199,12 +200,13 @@
     # equation (3.11)
     ret$Ga <- (dlaInNu %*% t(dlaInNu)) * Sigma_1 * 4 / d^2 / (d - 1)^2 +
       (dlaInNu %*% t(Sigma_2_3) + Sigma_2_3 %*% t(dlaInNu)) * 2 / d / (d - 1) + Sigma_4
-
+    print(ret$Ga)
     ev <- eigen(ret$Ga)
+    print(ev)
     evMin <-  min(ev$values)
     old <- ret$Ga
     if(min(ev$values) < 2e-7){
-      ret$Ga <- as.matrix(nearPD(ret$Ga)$mat)
+      ret$Ga <- as.matrix(Matrix::nearPD(ret$Ga)$mat)
       print(paste('not positiv definit matrix projected. rel.distance=',signif(sum((ret$Ga-old)^2)/sum(old^2),2),' smallest EV=',evMin,sep=''))
       }
     }

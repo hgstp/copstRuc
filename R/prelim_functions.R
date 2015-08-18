@@ -53,7 +53,7 @@
 }
 
 #------------------------------------------
-  FQD  <-  function(L, Rvec, GaInv, weight_matrix = "adjusted", d_FQD, m_FQD){
+  FQD  <-  function(L, R, GaInv, weight_matrix = "adjusted", d_FQD, m_FQD){
 
     # computes the quadratic discrepancy function (FQD) with penalty
     #
@@ -109,7 +109,7 @@
 
 
 
-    Delta_GInv_Delta <- as.matrix(nearPD(t(Delta) %*% GaInv %*% Delta)$mat)
+    Delta_GInv_Delta <- as.matrix(Matrix::nearPD(t(Delta) %*% GaInv %*% Delta)$mat)
 
 
     chol_Delta_GInv_Delta <- chol(Delta_GInv_Delta)
@@ -123,7 +123,7 @@
 
     U = GaInv - correction_term
     U = (U + t(U))/2
-    U = as.matrix(nearPD( U )$mat)
+    U = as.matrix(Matrix::nearPD( U )$mat)
 
 
 
@@ -141,7 +141,7 @@
 #---------------------------
 
 
-  FQDnonPenal =  function(L, Rvec, GaInv, weight_matrix = "adjusted", d_FQD, m_FQD){
+  FQDnonPenal =  function(L, R, GaInv, weight_matrix = "adjusted", d_FQD, m_FQD){
 
     # computes the quadratic discrepancy function (FQD) without penalty
 
@@ -168,7 +168,7 @@
     }
 
 
-    Delta_GInv_Delta <- as.matrix(nearPD(t(Delta) %*% GaInv %*% Delta)$mat)
+    Delta_GInv_Delta <- as.matrix(Matrix::nearPD(t(Delta) %*% GaInv %*% Delta)$mat)
 
     chol_Delta_GInv_Delta <- chol(Delta_GInv_Delta)
 
@@ -182,7 +182,7 @@
 
     U <- GaInv - correction_term
     U <- (U + t(U)) / 2
-    U <- as.matrix(nearPD(U)$mat)
+    U <- as.matrix(Matrix::nearPD(U)$mat)
 
     if(weight_matrix == 'adjusted'){
       ret <- t(Rvec - RL) %*% U %*% (Rvec - RL)

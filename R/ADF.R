@@ -58,7 +58,7 @@ ADF  <-  function(Rvec, Ga, n, d, m, weight_matrix_adf = "regular", maxit_optim 
       Lstart <- as.vector(varimax(matrix(fa$loadings, d, m))$loadings[1 : (d * m)])
       }
 
-    tmp <- optim(Lstart, FQD, Rvec = Rvec, GaInv = chol_Gamma_inv,
+    tmp <- optim(Lstart, FQD, R = Rvec, GaInv = chol_Gamma_inv,
                  d_FQD = d, m_FQD = m, weight_matrix = weight_matrix_adf,
                  control = list(maxit = maxit_optim))
 
